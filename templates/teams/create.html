@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Add Team{% endblock %}
+{% block content %}
+<h2 class="mb-4">Add New Team</h2>
+
+<form method="post" class="card p-4 shadow-sm">
+  <div class="mb-3">
+    <label for="name" class="form-label">Team Name</label>
+    <input type="text" name="name" id="name" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="sponsor_id" class="form-label">Sponsor</label>
+    <select name="sponsor_id" id="sponsor_id" class="form-select" required>
+      {% for sponsor in sponsors %}
+        <option value="{{ sponsor.sponsor_id }}">{{ sponsor.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="captain" class="form-label">Captain</label>
+    <input type="text" name="captain" id="captain" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="coach_id" class="form-label">Coach</label>
+    <select name="coach_id" id="coach_id" class="form-select" required>
+      {% for coach in coaches %}
+        <option value="{{ coach.coach_id }}">{{ coach.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="odi_ranking" class="form-label">ODI Ranking</label>
+    <input type="number" name="odi_ranking" id="odi_ranking" class="form-control" min="0">
+  </div>
+
+  <div class="mb-3">
+    <label for="t20i_ranking" class="form-label">T20I Ranking</label>
+    <input type="number" name="t20i_ranking" id="t20i_ranking" class="form-control" min="0">
+  </div>
+
+  <div class="mb-3">
+    <label for="test_ranking" class="form-label">Test Ranking</label>
+    <input type="number" name="test_ranking" id="test_ranking" class="form-control" min="0">
+  </div>
+
+  <button type="submit" class="btn btn-success">Add Team</button>
+</form>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Player Details{% endblock %}
+{% block content %}
+<div class="container mt-4 animated fadeIn">
+  <div class="card shadow-sm p-4 mb-4">
+    <h2>{{ player.first_name }} {{ player.last_name }} — Cap #{{ player.cap_number }}</h2>
+    <p><strong>Team:</strong> {{ player.team_name }}</p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow-sm p-3 mb-4">
+        <h4>📊 Career Stats</h4>
+        <ul class="list-group">
+          <li class="list-group-item">Total Matches: {{ stats.total_matches }}</li>
+          <li class="list-group-item">Total Runs: {{ stats.total_runs }}</li>
+          <li class="list-group-item">Batting Avg: {{ "%.2f"|format(stats.avg_bat) }}</li>
+          <li class="list-group-item">Strike Rate: {{ "%.2f"|format(stats.strike_rate) }}</li>
+          <li class="list-group-item">Wickets: {{ stats.total_wickets }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm p-3 mb-4">
+        <h4>🏆 Awards</h4>
+        <ul class="list-group">
+          <li class="list-group-item">MOM: {{ awards.mom }}</li>
+          <li class="list-group-item">POS: {{ awards.pos }}</li>
+          <li class="list-group-item">World Cups: {{ awards.wc }}</li>
+                  </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>Match Records</h4>
+    <a href="{{ url_for('records_create') }}?player_id={{ player.player_id }}" class="btn btn-sm btn-success">+ Add Record</a>
+  </div>
+  <table class="table table-striped table-hover shadow mb-4">
+    <thead class="table-dark">
+      <tr><th>Match</th><th>Runs</th><th>Avg</th><th>SR</th><th>Wickets</th></tr>
+    </thead>
+    <tbody>
+      {% for r in match_records %}
+        <tr>
+          <td>{{ r.matchid }}</td><td>{{ r.runs }}</td><td>{{ r.avg }}</td>
+          <td>{{ r.strike_rate }}</td><td>{{ r.wickets }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>Injury History</h4>
+    <a href="{{ url_for('injuries_create') }}?player_id={{ player.player_id }}" class="btn btn-sm btn-warning">+ Add Injury</a>
+  </div>
+  <table class="table table-striped shadow mb-4">
+    <thead class="table-dark">
+      <tr><th>Date</th><th>Type</th><th>Match</th><th>Recovery</th></tr>
+    </thead>
+    <tbody>
+      {% for inv in injuries %}
+        <tr>
+          <td>{{ inv.injurydate }}</td><td>{{ inv.injurytype }}</td><td>{{ inv.injurymatch }}</td><td>{{ inv.recovery_time }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

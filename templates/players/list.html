@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Players{% endblock %}
+{% block content %}
+<div class="container mt-4 animated fadeIn">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Players</h2>
+    <a href="{{ url_for('players_create') }}" class="btn btn-success">+ Add Player</a>
+  </div>
+  <table class="table table-striped table-hover shadow">
+    <thead class="table-dark">
+      <tr>
+        <th>Cap#</th><th>Name</th><th>Team</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in players %}
+      <tr>
+        <td>{{ p.cap_number }}</td>
+        <td>{{ p.first_name }} {{ p.last_name }}</td>
+        <td>{{ p.team_name }}</td>
+        <td>
+          <a href="{{ url_for('players_detail', player_id=p.player_id) }}" class="btn btn-sm btn-primary me-1">View</a>
+          <form action="{{ url_for('players_delete', player_id=p.player_id) }}" method="post" style="display:inline">
+            <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this player?')">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

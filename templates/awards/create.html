@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Awards{% endblock %}
+{% block content %}
+<h2>Update Awards</h2>
+<form method="post" class="card p-4">
+  <label>Player</label>
+  <select name="player_id" class="form-control">
+    {% for p in players %}
+      <option value="{{ p.player_id }}">{{ p.cap_number }} - {{ p.first_name }} {{ p.last_name }}</option>
+    {% endfor %}
+  </select>
+
+  <label class="mt-2">Number of MOM Awards</label>
+  <input type="number" name="no_of_mom" class="form-control">
+
+  <label class="mt-2">Number of POS Awards</label>
+  <input type="number" name="no_of_pos" class="form-control">
+
+  <label class="mt-2">World Cups Won</label>
+  <input type="number" name="worldcupswon" class="form-control">
+
+  <button class="btn btn-primary mt-3">Save</button>
+</form>
+{% endblock %}

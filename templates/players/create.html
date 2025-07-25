@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Add Player{% endblock %}
+{% block content %}
+<div class="container mt-4 animated fadeIn">
+  <div class="card shadow-sm p-4">
+    <h2 class="mb-4">Add New Player</h2>
+    <form method="post">
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label">Cap Number</label>
+          <input type="number" name="cap_number" class="form-control" required>
+        </div>
+        <div class="col">
+          <label class="form-label">Date of Birth</label>
+          <input type="date" name="dob" class="form-control" required>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label">First Name</label>
+          <input type="text" name="first_name" class="form-control" required>
+        </div>
+        <div class="col">
+          <label class="form-label">Middle Name</label>
+          <input type="text" name="middle_name" class="form-control">
+        </div>
+        <div class="col">
+          <label class="form-label">Last Name</label>
+          <input type="text" name="last_name" class="form-control" required>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label">Batting Style</label>
+          <select name="batting_style" class="form-select">
+            {% for s in batting_styles %}<option>{{ s }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">Bowling Style</label>
+          <select name="bowling_style" class="form-select">
+            {% for s in bowling_styles %}<option>{{ s }}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Team</label>
+        <select name="team_id" class="form-select">
+          {% for t in teams %}<option value="{{ t.team_id }}">{{ t.name }}</option>{% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Add Player</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

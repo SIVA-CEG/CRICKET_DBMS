@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Teams{% endblock %}
+{% block content %}
+<div class="container mt-4 animated fadeIn">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Teams</h2>
+    <a href="{{ url_for('teams_create') }}" class="btn btn-success">+ Add Team</a>
+  </div>
+  <table class="table table-hover shadow">
+    <thead class="table-dark">
+      <tr><th>ID</th><th>Name</th><th>Captain</th><th>Coach</th></tr>
+    </thead>
+    <tbody>
+      {% for team in teams %}
+      <tr><td>{{ team.team_id }}</td><td>{{ team.name }}</td><td>{{ team.captain }}</td><td>{{ team.coach }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
